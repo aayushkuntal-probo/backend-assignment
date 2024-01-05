@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const ContractController = require('../controllers/contract.controller.js');
 
 router.post('/',ContractController.createContract);
 router.get('/lists',ContractController.getContracts);
-router.get('/:id',ContractController.getContract);
-router.put('/:id',ContractController.updateContract);
-router.delete('/:id',ContractController.deleteContract);
+router.get('/:id',ContractController.getContractById);
+router.put('/:id',ContractController.updateContractById);
+router.delete('/:id',ContractController.deleteContractById);
 
 module.exports = router;
