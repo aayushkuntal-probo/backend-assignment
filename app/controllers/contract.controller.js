@@ -1,17 +1,18 @@
 const ContractModel = require('../models/contract.model');
 
+// POST => /api/contracts/
 const createContract = async (req, res) => {
     try {
         const { user_id, contract_name, description, amount } = req.body;
-        
-        ContractModel.createContract(user_id, contract_name, description, amount,(err, newContract) => {
-            if(err) {
+
+        ContractModel.createContract(user_id, contract_name, description, amount, (err, newContract) => {
+            if (err) {
                 res.status(500).json({ message: err.message });
             }
             else {
                 res.status(201).json(newContract);
             }
-        
+
         });
     }
     catch (err) {
@@ -19,27 +20,29 @@ const createContract = async (req, res) => {
     }
 }
 
+// GET => /api/contracts/all/:id
 const getContracts = async (req, res) => {
     try {
-        ContractModel.getAllContracts((err, contracts) => {
-            if(err) {
+        const user_id = req.params.id;
+        ContractModel.getAllContracts(user_id, (err, contracts) => {
+            if (err) {
                 res.status(500).json({ message: err.message });
             }
             else {
                 res.status(200).json(contracts);
             }
-        });
-    }
-    catch (err) {
+        })
+    } catch (err) {
         res.status(500).json({ message: err.message });
     }
 }
 
+// GET => /api/contracts/:id
 const getContractById = async (req, res) => {
     try {
         const id = req.params.id;
         ContractModel.getContractById(id, (err, contract) => {
-            if(err) {
+            if (err) {
                 res.status(500).json({ message: err.message });
             }
             else {
@@ -52,16 +55,15 @@ const getContractById = async (req, res) => {
     }
 }
 
+// PUT => /api/contracts/:id
 const updateContractById = async (req, res) => {
-    try{
+    try {
         const id = req.params.id;
 
-        //taking user_id etc only if it is not undefined
+        const {contract_name, description, amount } = req.body;
 
-        const { user_id, contract_name, description, amount } = req.body;
-
-        ContractModel.updateContractById(id, user_id, contract_name, description, amount, (err, updatedContract) => {
-            if(err) {
+        ContractModel.updateContractById(id,contract_name, description, amount, (err, updatedContract) => {
+            if (err) {
                 res.status(500).json({ message: err.message });
             }
             else {
@@ -74,15 +76,16 @@ const updateContractById = async (req, res) => {
     }
 }
 
+// DELETE => /api/contracts/:id
 const deleteContractById = async (req, res) => {
     try {
         const id = req.params.id;
-        ContractModel.deleteContractById(id, (err, deletedContract) => {
-            if(err) {
+        ContractModel.deleteContractById(id, (err) => {
+            if (err) {
                 res.status(500).json({ message: err.message });
             }
             else {
-                res.status(200).json(deletedContract);
+                res.status(200).json({ message: `Contract ${id} deleted successfully` });
             }
         });
     }

@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const ContractController = require('./controllers/contract.controller');
 
-router.post('/',ContractController.createContract);
-router.get('/lists',ContractController.getContracts);
-router.get('/:id',ContractController.getContractById);
-router.put('/:id',ContractController.updateContractById);
-router.delete('/:id',ContractController.deleteContractById);
+router.route('/').post(ContractController.createContract);
+router.route('/all/:id').get(ContractController.getContracts);
+router.route('/:id')
+    .get(ContractController.getContractById)
+    .put(ContractController.updateContractById)
+    .delete(ContractController.deleteContractById);
 
 module.exports = router;

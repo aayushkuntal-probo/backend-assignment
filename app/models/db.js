@@ -1,14 +1,12 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 const dbConfig = require('../../config/db.config');
 
 const dbConn = mysql.createPool(dbConfig);
 
-dbConn.getConnection((err) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('Connected to database');
-    }
-});
+dbConn.query("SELECT 1")
+    .then(() => {
+        console.log('SQL database connection established successfully.')
+    })
+    .catch(err => console.log('Database connection failed \n' + err))
 
 module.exports = dbConn;
