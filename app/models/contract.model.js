@@ -34,7 +34,7 @@ const getAllContracts = async (user_id,page,pageSize,callback) => {
 
 const getContractById = async (id, callback) => {
     try {
-        const query = 'SELECT contract_id,contract_name, description, amount FROM contracts WHERE contract_id = ?';
+        const query = 'SELECT user_id,contract_name, description, amount FROM contracts WHERE contract_id = ?';
         const values = [id];
         const [rows] = await db.query(query, values);
 
