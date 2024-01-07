@@ -1,6 +1,11 @@
 const ContractModel = require('../models/contract.model');
 
-// POST => /api/contracts/
+/*
+    *  POST : /
+    *  req-body : user_id, contract_name, description, amount
+    *  req-params : none
+*/
+
 const createContract = async (req, res) => {
     try {
         const { user_id, contract_name, description, amount } = req.body;
@@ -20,11 +25,19 @@ const createContract = async (req, res) => {
     }
 }
 
-// GET => /api/contracts/all/:id
-const getContracts = async (req, res) => {
+/*
+     *  GET : /all/:id?page=1&pageSize=10
+     *  req-body : none
+     *  req-params : page, pageSize
+*/
+
+const getContractsByUserId = async (req, res) => {
     try {
         const user_id = req.params.id;
-        ContractModel.getAllContracts(user_id, (err, contracts) => {
+        const page = parseInt(req.query.page) || 1;
+        const pageSize = parseInt(req.query.pageSize) || 10;
+
+        ContractModel.getAllContracts(user_id,page,pageSize, (err, contracts) => {
             if (err) {
                 res.status(500).json({ message: err.message });
             }
@@ -37,8 +50,12 @@ const getContracts = async (req, res) => {
     }
 }
 
-// GET => /api/contracts/:id
-const getContractById = async (req, res) => {
+/*
+    *  GET : /:id
+    *  req-body : none
+    *  req-params : id
+*/
+const getContractByContractId = async (req, res) => {
     try {
         const id = req.params.id;
         ContractModel.getContractById(id, (err, contract) => {
@@ -55,7 +72,11 @@ const getContractById = async (req, res) => {
     }
 }
 
-// PUT => /api/contracts/:id
+/*
+    *  PUT : /:id
+    *  req-body : contract_name, description, amount
+    *  req-params : id
+*/
 const updateContractById = async (req, res) => {
     try {
         const id = req.params.id;
@@ -76,7 +97,12 @@ const updateContractById = async (req, res) => {
     }
 }
 
-// DELETE => /api/contracts/:id
+/*
+    *  DELETE : /:id
+    *  req-body : none
+    *  req-params : id
+*/
+
 const deleteContractById = async (req, res) => {
     try {
         const id = req.params.id;
@@ -96,8 +122,8 @@ const deleteContractById = async (req, res) => {
 
 module.exports = {
     createContract,
-    getContracts,
-    getContractById,
+    getContractsByUserId,
+    getContractByContractId,
     updateContractById,
     deleteContractById
 }

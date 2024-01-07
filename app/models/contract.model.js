@@ -16,10 +16,12 @@ const createContract = async (user_id, contract_name, description, amount, callb
     }
 }
 
-const getAllContracts = async (user_id,callback) => {
+const getAllContracts = async (user_id,page,pageSize,callback) => {
     try {
-        const query = 'SELECT contract_id,contract_name, description, amount FROM contracts WHERE user_id = ?';
-        const values = [user_id];
+        const skip = (page - 1) * pageSize;
+
+        const query = 'SELECT contract_id,contract_name, description, amount FROM contracts WHERE user_id = ? LIMIT ?,?';
+        const values = [user_id,skip,pageSize];
         const [rows] = await db.query(query, values);
 
         if(rows.length === 0) callback({message: 'No contracts found'}, null);

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Aayush",
   "license": "ISC",
@@ -15,6 +15,9 @@
     "mysql2": "^3.6.5"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^8.2.0",
     "nodemon": "^3.0.2"
   }
 }
