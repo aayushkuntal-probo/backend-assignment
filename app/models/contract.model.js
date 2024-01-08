@@ -66,7 +66,7 @@ const getContractById = async (id, callback) => {
         const values = [id];
         const [queryResult] = await db.query(query, values);
 
-        if(rows.length === 0) callback({message: 'No contract found'}, null);
+        if(queryResult.length === 0) callback({message: 'No contract found'}, null);
         else callback(null, queryResult[0]);
 
     } catch (err) {
