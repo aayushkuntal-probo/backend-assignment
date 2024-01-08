@@ -37,7 +37,7 @@ const getContractsByUserId = async (req, res) => {
         const page = parseInt(req.query.page) || 1;
         const pageSize = parseInt(req.query.pageSize) || 10;
 
-        ContractModel.getAllContracts(user_id,page,pageSize, (err, contracts) => {
+        ContractModel.getAllContracts(user_id, page, pageSize, (err, contracts) => {
             if (err) {
                 res.status(500).json({ message: err.message });
             }
@@ -81,9 +81,9 @@ const updateContractById = async (req, res) => {
     try {
         const id = req.params.id;
 
-        const {contract_name, description, amount } = req.body;
+        const { contract_name, description, amount } = req.body;
 
-        ContractModel.updateContractById(id,contract_name, description, amount, (err, updatedContract) => {
+        ContractModel.updateContractById(id, contract_name, description, amount, (err, updatedContract) => {
             if (err) {
                 res.status(500).json({ message: err.message });
             }
