@@ -3,15 +3,15 @@ const ContractHelper = require('../helpers/contract.helper');
 
 const createContract = async (user_id, contract_name, description, amount, callback) => {
     try {
-        const query = 'INSERT INTO contracts (user_id, contract_name, description, amount) VALUES (?, ?, ?, ?)';
+        const createQuery = 'INSERT INTO contracts (user_id, contract_name, description, amount) VALUES (?, ?, ?, ?)';
         const values = [user_id, contract_name, description, amount];
-        const [rows] = await db.query(query, values);
+        const [result] = await db.query(createQuery, values);
 
-        const contract_id = rows.insertId;
-        const query2 = 'SELECT * FROM contracts WHERE contract_id = ?';
-        const [rows2] = await db.query(query2, [contract_id]);
+        const contract_id = result.insertId;
+        const getCreatedContractQuery = 'SELECT * FROM contracts WHERE contract_id = ?';
+        const [createdContractRow] = await db.query(getCreatedContractQuery, [contract_id]);
 
-        callback(null, rows2[0]);
+        callback(null, createdContractRow[0]);
     } catch (err) {
         callback(err, null);
     }
