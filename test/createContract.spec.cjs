@@ -29,7 +29,7 @@ describe("Contracts API", () => {
       expect(res.body.description).to.equal(newContract.description);
 
       const actualAmount = parseFloat(res.body.amount).toFixed(2);
-      expect(actualAmount).to.equal(newContract.amount.toString());
+      expect(actualAmount).to.equal(newContract.amount.toFixed().toString());
 
     });
   });
