@@ -25,16 +25,18 @@ This Node.js backend project provides CRUD operations. It is built using Express
 ## Configuration
 Update the `.env` file with your database and API information.
 
-## API Documentation
-Explore the API endpoints using the provided Postman documentation: https://documenter.getpostman.com/view/17282293/2s9YsGjZhZ
-
-
 ```env
 DB_HOST=host_name_here
 DB_USER=admin
 DB_DATABASE=db_name
 DB_PASSWORD=pass_here
 ```
+
+## API Documentation
+Explore the API endpoints using the provided Postman documentation: https://documenter.getpostman.com/view/17282293/2s9YsGjZhZ
+
+
+
 
 # Usage
 ## Development
