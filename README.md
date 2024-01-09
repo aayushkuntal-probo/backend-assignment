@@ -55,7 +55,3 @@ Run tests using:
 ```bash
 npm test
 ```
-
-Testing
-Run tests using:
-npm test
