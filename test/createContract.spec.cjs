@@ -10,7 +10,7 @@ describe("Contracts API", () => {
     it("should create a new contract", async () => {
 
       const newContract = {
-        user_id: "1",
+        user_id: 1,
         contract_name: "Sample Contract",
         description: "This is a sample contract",
         amount: 1000.11,
@@ -29,7 +29,7 @@ describe("Contracts API", () => {
       expect(res.body.description).to.equal(newContract.description);
 
       const actualAmount = parseFloat(res.body.amount).toFixed(2);
-      expect(actualAmount).to.equal(newContract.amount.toFixed().toString());
+      expect(actualAmount).to.equal(newContract.amount.toFixed(2).toString());
 
     });
   });
